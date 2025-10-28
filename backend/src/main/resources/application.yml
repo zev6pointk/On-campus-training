@@ -1,0 +1,104 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+spring:
+  application:
+    name: teacher-assistant
+
+  # 数据库配置
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/assistant?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: 123456
+
+  # Redis配置
+  redis:
+    host: localhost
+    port: 6379
+    password:
+    database: 0
+    timeout: 3000ms
+    lettuce:
+      pool:
+        max-active: 8
+        max-idle: 8
+        min-idle: 0
+        max-wait: -1ms
+
+  # Jackson配置
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    default-property-inclusion: non_null
+
+# MyBatis Plus配置
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      id-type: AUTO
+      logic-delete-field: deleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+  mapper-locations: classpath*:/mapper/**/*.xml
+  type-aliases-package: com.teacher.assistant.entity
+
+# JWT配置
+jwt:
+  secret: MySecretKeyForTeacherAssistantSystem2025
+  expiration: 604800  # 7天，单位秒
+  header: Authorization
+  prefix: "Bearer "
+
+# DeepSeek API配置
+deepseek:
+  api:
+    key: ${DEEPSEEK_API_KEY:your_api_key_here}
+    base-url: https://api.deepseek.com
+    model: deepseek-chat
+    max-tokens: 2000
+    temperature: 0.7
+
+# 日志配置
+logging:
+  level:
+    com.teacher.assistant: debug
+  pattern:
+    console: '%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{50} - %msg%n'
+    file: '%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{50} - %msg%n'
+  file:
+    name: logs/assistant.log
+    max-size: 100MB
+    max-history: 30
+
+# 管理端点配置
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: always
+
+# 自定义配置
+app:
+  # WebSocket配置
+  websocket:
+    allowed-origins: "*"
+    path: /ws
+  # 文件上传配置
+  file:
+    upload:
+      path: /tmp/uploads
+      max-size: 10MB
+  # 分页配置
+  page:
+    default-size: 10
+    max-size: 100
