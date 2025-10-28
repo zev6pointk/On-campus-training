@@ -147,6 +147,48 @@ const handleCommand = (command) => {
   width: 220px;
 }
 
+/* 菜单项默认状态 - 提升可见度 */
+:deep(.el-menu-item) {
+  background: rgba(255, 255, 255, 0.05) !important;
+  color: #E0E6ED !important;
+  border-radius: 0 !important;
+  margin: 2px 0;
+  transition: all 0.3s ease;
+}
+
+/* 菜单项图标颜色 */
+:deep(.el-menu-item .el-icon) {
+  color: #E0E6ED !important;
+}
+
+/* 菜单项激活状态 - 明显的视觉区分 */
+:deep(.el-menu-item.is-active) {
+  background: #409EFF !important;
+  color: white !important;
+  position: relative;
+}
+
+/* 激活状态左侧蓝色边框指示 */
+:deep(.el-menu-item.is-active)::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: #fff;
+}
+
+/* 菜单项悬停状态 - 平滑过渡效果 */
+:deep(.el-menu-item:hover) {
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* 悬停时图标同步变化 */
+:deep(.el-menu-item:hover .el-icon) {
+  color: #E0E6ED !important;
+}
+
 .main-container {
   flex: 1;
   display: flex;
