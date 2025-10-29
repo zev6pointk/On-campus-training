@@ -285,7 +285,7 @@ onMounted(() => {
   display: grid;
   grid-template-columns: 1fr 280px;
   gap: 20px;
-  height: calc(100vh - 160px);
+  height: calc(100vh - 100px);
 }
 
 .chat-card {

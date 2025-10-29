@@ -253,7 +253,7 @@ const handleCommand = (command) => {
 
 .content {
   background: #f0f2f5;
-  padding: 20px;
+  padding: 0;
   overflow-y: auto;
 }
 </style>

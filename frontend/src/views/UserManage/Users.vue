@@ -398,6 +398,7 @@ onMounted(() => {
 
 .search-card,
 .table-card {
+  width: 100%;
   margin-bottom: 20px;
 }
 
