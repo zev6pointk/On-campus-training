@@ -68,6 +68,15 @@ router.beforeEach((to, from, next) => {
     return
   }
 
+  // 检查用户管理页面权限（仅管理员可访问）
+  if (to.path === '/users') {
+    const userInfo = userStore.userInfo
+    if (!userInfo || userInfo.userType !== 1) {
+      next('/statistics')
+      return
+    }
+  }
+
   next()
 })
 

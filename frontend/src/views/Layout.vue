@@ -17,7 +17,8 @@
           <template #title>数据统计</template>
         </el-menu-item>
 
-        <el-menu-item index="/users">
+        <!-- 用户管理菜单只对管理员显示 -->
+        <el-menu-item v-if="userStore.userInfo?.userType === 1" index="/users">
           <el-icon><User /></el-icon>
           <template #title>用户管理</template>
         </el-menu-item>

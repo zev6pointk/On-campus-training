@@ -172,11 +172,16 @@
 </template>
 
 <script setup>
-import { ref, reactive, onMounted } from 'vue'
+import { ref, reactive, onMounted, computed } from 'vue'
+import { useRouter } from 'vue-router'
+import { useUserStore } from '@/stores/user'
 import { Search, Refresh, Plus } from '@element-plus/icons-vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { getUsers, updateUser, deleteUser } from '@/api/auth'
 import dayjs from 'dayjs'
+
+const router = useRouter()
+const userStore = useUserStore()
 
 const loading = ref(false)
 const dialogVisible = ref(false)
@@ -350,6 +355,15 @@ const handleCurrentChange = (val) => {
 }
 
 onMounted(() => {
+  // 检查用户权限（仅管理员可访问用户管理页面）
+  if (!userStore.userInfo || userStore.userInfo.userType !== 1) {
+    ElMessage.warning('您没有访问用户管理页面的权限，即将跳转到数据统计页面')
+    setTimeout(() => {
+      router.push('/statistics')
+    }, 1500)
+    return
+  }
+
   loadUsers()
 })
 </script>
