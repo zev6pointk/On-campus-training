@@ -9,6 +9,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Map;
 
@@ -104,12 +105,16 @@ public class StatisticsController {
     @GetMapping("/users/trend")
     public ResultVO<Map<String, Object>> getActiveUserTrend(
             @RequestHeader("Authorization") String authHeader,
-            @RequestParam(defaultValue = "2025-01-01") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDateTime startTime,
-            @RequestParam(defaultValue = "2025-12-31") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDateTime endTime) {
+            @RequestParam(defaultValue = "2025-01-01") @DateTimeFormat(pattern = "yyyy-MM-dd") String startDateStr,
+            @RequestParam(defaultValue = "2025-12-31") @DateTimeFormat(pattern = "yyyy-MM-dd") String endDateStr) {
 
         try {
-            log.debug("收到获取活跃用户趋势请求, Authorization: {}, startTime: {}, endTime: {}",
-                authHeader != null ? "Bearer [已隐藏]" : "null", startTime, endTime);
+            log.debug("收到获取活跃用户趋势请求, Authorization: {}, startDate: {}, endDate: {}",
+                authHeader != null ? "Bearer [已隐藏]" : "null", startDateStr, endDateStr);
+
+            // 将日期字符串转换为LocalDateTime
+            LocalDateTime startTime = LocalDate.parse(startDateStr, java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd")).atStartOfDay();
+            LocalDateTime endTime = LocalDate.parse(endDateStr, java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd")).atTime(23, 59, 59);
 
             Map<String, Object> stats = statisticsService.getActiveUserTrend(startTime, endTime);
             return ResultVO.success(stats);
@@ -126,12 +131,16 @@ public class StatisticsController {
     @GetMapping("/chat/count")
     public ResultVO<Map<String, Object>> getChatCountStatistics(
             @RequestHeader("Authorization") String authHeader,
-            @RequestParam(defaultValue = "2025-01-01") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDateTime startTime,
-            @RequestParam(defaultValue = "2025-12-31") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDateTime endTime) {
+            @RequestParam(defaultValue = "2025-01-01") @DateTimeFormat(pattern = "yyyy-MM-dd") String startDateStr,
+            @RequestParam(defaultValue = "2025-12-31") @DateTimeFormat(pattern = "yyyy-MM-dd") String endDateStr) {
 
         try {
-            log.debug("收到获取对话量统计请求, Authorization: {}, startTime: {}, endTime: {}",
-                authHeader != null ? "Bearer [已隐藏]" : "null", startTime, endTime);
+            log.debug("收到获取对话量统计请求, Authorization: {}, startDate: {}, endDate: {}",
+                authHeader != null ? "Bearer [已隐藏]" : "null", startDateStr, endDateStr);
+
+            // 将日期字符串转换为LocalDateTime
+            LocalDateTime startTime = LocalDate.parse(startDateStr, java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd")).atStartOfDay();
+            LocalDateTime endTime = LocalDate.parse(endDateStr, java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd")).atTime(23, 59, 59);
 
             Map<String, Object> stats = statisticsService.getChatCountStatistics(startTime, endTime);
             return ResultVO.success(stats);
