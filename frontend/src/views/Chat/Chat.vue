@@ -497,13 +497,13 @@ onMounted(() => {
   transform: translateY(-1px);
 }
 
-.message-user .message-bubble {
-  background: linear(135deg, #409EFF 0%, #66b1ff 100%);
+.message-item.message-user .message-bubble {
+  background-image: linear-gradient(135deg, #409EFF 0%, #66b1ff 100%);
   color: white;
   border-bottom-right-radius: 4px;
 }
 
-.message-assistant .message-bubble {
+.message-item.message-assistant .message-bubble {
   background: white;
   color: #303133;
   border-bottom-left-radius: 4px;
@@ -515,6 +515,7 @@ onMounted(() => {
   font-size: 15px;
   word-wrap: break-word;
   white-space: pre-wrap;
+  color: inherit;
 }
 
 /* 消息操作按钮 */
@@ -753,6 +754,7 @@ onMounted(() => {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  color: #303133;
 }
 
 .session-more {

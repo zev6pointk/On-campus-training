@@ -168,3 +168,6 @@ temp/
 
 # Claude
 .claude/
+
+# PNG
+*.PNG
