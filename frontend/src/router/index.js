@@ -39,6 +39,12 @@ const router = createRouter({
           name: 'Message',
           component: () => import('@/views/Message/Message.vue'),
           meta: { title: '即时通讯', icon: 'Message' }
+        },
+        {
+          path: '/profile',
+          name: 'Profile',
+          component: () => import('@/views/Profile/Profile.vue'),
+          meta: { title: '个人资料', icon: 'UserFilled' }
         }
       ]
     }

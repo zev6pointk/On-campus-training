@@ -60,3 +60,24 @@ export function createUser(data) {
     data
   })
 }
+
+// 上传用户头像
+export function uploadUserAvatar(formData) {
+  return request({
+    url: '/auth/avatar',
+    method: 'post',
+    data: formData,
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+  })
+}
+
+// 修改密码
+export function changePassword(data) {
+  return request({
+    url: '/auth/password',
+    method: 'put',
+    data
+  })
+}

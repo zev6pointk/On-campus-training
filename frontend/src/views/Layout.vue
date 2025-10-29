@@ -32,6 +32,11 @@
           <el-icon><Message /></el-icon>
           <template #title>即时通讯</template>
         </el-menu-item>
+
+        <el-menu-item index="/profile">
+          <el-icon><UserFilled /></el-icon>
+          <template #title>个人资料</template>
+        </el-menu-item>
       </el-menu>
     </el-aside>
 
@@ -85,6 +90,7 @@ import {
   User,
   ChatDotRound,
   Message,
+  UserFilled,
   ArrowDown
 } from '@element-plus/icons-vue'
 
@@ -103,7 +109,7 @@ const toggleCollapse = () => {
 const handleCommand = (command) => {
   switch (command) {
     case 'profile':
-      ElMessage.info('个人资料功能开发中')
+      router.push('/profile')
       break
     case 'logout':
       userStore.logout()
