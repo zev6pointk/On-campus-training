@@ -1,263 +1,309 @@
 # 师生助手系统
 
-基于SpringBoot + Vue3的综合性师生助手系统，集成了数据可视化、用户管理、大模型对话和即时通讯功能。
+一个基于 Spring Boot + Vue 3 的全栈教育辅助平台，为教师和学生提供智能对话、即时通讯、数据统计等功能。
 
-## 🚀 项目特色
+## 📋 项目简介
 
-- **前后端分离架构**：SpringBoot后端 + Vue3前端
-- **现代化技术栈**：使用最新稳定版本的主流框架
-- **功能完善**：数据统计、用户管理、AI对话、即时通讯四大核心模块
-- **响应式设计**：适配多种屏幕尺寸
-- **权限控制**：基于JWT的Token认证机制
+本项目是一个专为教育场景设计的数字化助手系统，支持三种用户角色（管理员、教师、学生），提供以下核心功能：
 
-## 📋 技术栈
+- 👥 **用户管理系统** - 完整的角色权限管理
+- 🤖 **大模型智能对话** - 集成 DeepSeek API 的 AI 助手
+- 💬 **即时通讯功能** - 基于 WebSocket 的实时消息系统
+- 📊 **数据统计分析** - 用户活跃度、对话统计等可视化图表
+- 👤 **个人资料管理** - 用户信息维护和权限管理
 
-### 后端技术
-- **框架**：SpringBoot 3.1.5
-- **安全**：Spring Security + JWT
-- **数据库**：MySQL 8.0 + MyBatis-Plus
-- **实时通讯**：WebSocket
-- **API调用**：RestTemplate
-- **其他**：Lombok、Validation
+## 🛠 技术栈
 
-### 前端技术
-- **框架**：Vue 3.4.0
-- **路由**：Vue Router 4
-- **状态管理**：Pinia
-- **UI组件**：Element Plus
-- **图表**：ECharts + vue-echarts
-- **HTTP客户端**：Axios
-- **实时通讯**：Socket.IO Client
-- **构建工具**：Vite
+### 后端
+- **框架**: Spring Boot 3.1.5
+- **语言**: Java 17
+- **安全**: Spring Security + JWT
+- **数据库**: MyBatis Plus + MySQL 8.0
+- **缓存**: Redis
+- **实时通信**: Spring WebSocket
+- **构建**: Maven
 
-## 🏗️ 项目结构
+### 前端
+- **框架**: Vue 3 (Composition API)
+- **构建工具**: Vite 5.0
+- **UI库**: Element Plus
+- **状态管理**: Pinia
+- **路由**: Vue Router 4
+- **图表**: ECharts
+- **实时通信**: Socket.io-client
+- **样式**: Sass
 
-```
-师生助手系统/
-├── backend/                    # SpringBoot后端
-│   ├── src/main/java/com/teacher/assistant/
-│   │   ├── controller/         # 控制器层
-│   │   ├── service/            # 服务层
-│   │   ├── mapper/             # MyBatis映射
-│   │   ├── entity/             # 实体类
-│   │   ├── config/             # 配置类
-│   │   └── AssistantApplication.java
-│   ├── src/main/resources/
-│   │   ├── application.yml     # 配置文件
-│   │   └── mapper/             # MyBatis XML映射
-│   └── pom.xml                 # Maven配置
-├── frontend/                   # Vue3前端
-│   ├── src/
-│   │   ├── views/              # 页面组件
-│   │   │   ├── Statistics/     # 数据统计
-│   │   │   ├── UserManage/     # 用户管理
-│   │   │   ├── Chat/           # 大模型对话
-│   │   │   └── Message/        # 即时通讯
-│   │   ├── api/                # API接口
-│   │   ├── stores/             # Pinia状态管理
-│   │   ├── router/             # 路由配置
-│   │   ├── utils/              # 工具函数
-│   │   └── main.js
-│   ├── package.json
-│   └── vite.config.js
-└── README.md
-```
-
-## 🔧 功能模块
-
-### 1. 数据统计模块
-- **用户数量统计**：总用户数、用户类型分布
-- **数据可视化**：ECharts图表展示
-  - 饼图：用户类型分布
-  - 柱状图：院系分布
-  - 折线图：活跃用户趋势
-- **概览卡片**：关键指标一目了然
-
-### 2. 用户管理模块
-- **CRUD操作**：新增、查询、更新、删除用户
-- **高级搜索**：支持用户名、用户类型筛选
-- **分页展示**：大数据量分页处理
-- **表单验证**：完整的前后端数据校验
-
-### 3. 大模型对话模块
-- **AI助手**：集成DeepSeek API
-- **会话管理**：支持多会话切换
-- **历史记录**：保存并查看对话历史
-- **流式响应**：实时显示AI回复
-
-### 4. 即时通讯模块
-- **实时聊天**：基于WebSocket的实时消息
-- **联系人列表**：显示在线用户
-- **消息状态**：发送中、已发送、已读状态
-- **聊天记录**：保存并加载历史消息
-
-## 📦 快速开始
+## 🚀 快速开始
 
 ### 环境要求
-- JDK 17+
+
+- Java 17+
 - Node.js 16+
-- MySQL 8.0+
-- Maven 3.6+
+- MySQL 8.0
+- Redis 6.0+
 
-### 后端启动
+### 1. 克隆项目
 
-1. **配置数据库**
-```sql
--- 创建数据库
-CREATE DATABASE assistant DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
--- 创建用户表（示例）
-CREATE TABLE `user` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `username` varchar(50) NOT NULL,
-  `password` varchar(100) NOT NULL,
-  `real_name` varchar(50) DEFAULT NULL,
-  `email` varchar(100) DEFAULT NULL,
-  `phone` varchar(20) DEFAULT NULL,
-  `gender` tinyint DEFAULT NULL,
-  `avatar` varchar(255) DEFAULT NULL,
-  `user_type` tinyint NOT NULL COMMENT '1-系统管理员 2-教师 3-学生',
-  `department` varchar(100) DEFAULT NULL,
-  `major` varchar(100) DEFAULT NULL,
-  `grade` varchar(20) DEFAULT NULL,
-  `student_id` varchar(50) DEFAULT NULL,
-  `status` tinyint NOT NULL DEFAULT '1',
-  `last_login_time` datetime DEFAULT NULL,
-  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+```bash
+git clone <项目地址>
+cd on-campus-training
 ```
 
-2. **修改配置文件**
-编辑 `backend/src/main/resources/application.yml`，修改数据库连接信息：
+### 2. 后端启动
+
+#### 配置数据库
+创建 MySQL 数据库：
+```sql
+CREATE DATABASE assistant CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+```
+
+配置 `backend/src/main/resources/application.yml` 中的数据库连接信息：
 ```yaml
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/assistant?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
-    username: your_username
-    password: your_password
+    url: jdbc:mysql://localhost:3306/assistant
+    username: root
+    password: 123456
 ```
 
-3. **安装依赖并启动**
+#### 启动后端服务
 ```bash
 cd backend
-mvn clean install
+mvn clean compile
 mvn spring-boot:run
 ```
 
-### 前端启动
+或直接运行 JAR：
+```bash
+mvn clean package
+java -jar target/assistant-0.0.1-SNAPSHOT.jar
+```
 
-1. **安装依赖**
+### 3. 前端启动
+
 ```bash
 cd frontend
 npm install
-# 或使用 yarn
-yarn install
-```
-
-2. **启动开发服务器**
-```bash
 npm run dev
-# 或使用 yarn
-yarn dev
 ```
 
-3. **访问系统**
-- 前端：http://localhost:3000
-- 后端API：http://localhost:8080/api
+访问：http://localhost:5173
 
-## 🔑 默认账号
+### 4. 环境变量配置
 
-系统提供以下测试账号：
-
-| 角色 | 用户名 | 密码 |
-|------|--------|------|
-| 管理员 | admin | admin123 |
-| 教师 | teacher | teacher123 |
-| 学生 | student | student123 |
-
-## 📝 API文档
-
-### 认证接口
-- `POST /api/auth/login` - 用户登录
-- `POST /api/auth/register` - 用户注册
-- `GET /api/auth/me` - 获取当前用户信息
-
-### 用户管理
-- `GET /api/auth/users` - 获取用户列表（分页）
-- `PUT /api/auth/users/{id}` - 更新用户信息
-- `DELETE /api/auth/users/{id}` - 删除用户
-
-### 聊天接口
-- `POST /api/chat/send` - 发送消息
-- `GET /api/chat/history/{sessionId}` - 获取聊天历史
-- `GET /api/chat/sessions` - 获取会话列表
-
-### 统计接口
-- `GET /api/statistics/overview` - 获取概览统计
-- `GET /api/statistics/users/count` - 用户数量统计
-- `GET /api/statistics/users/distribution` - 用户类型分布
-- `GET /api/statistics/department/distribution` - 院系分布
-
-## 🔧 配置说明
-
-### DeepSeek API配置
-在 `application.yml` 中配置：
+在 `backend/src/main/resources/application.yml` 中配置：
 ```yaml
 deepseek:
   api:
-    key: YOUR_API_KEY
-    base-url: https://api.deepseek.com
-    model: deepseek-chat
+    key: YOUR_DEEPSEEK_API_KEY
 ```
 
-### JWT配置
+## 👤 测试账户
+
+| 角色 | 用户名 | 密码 |
+|------|--------|------|
+| 管理员 | admin | 123456 |
+| 教师 | teacher001 | 123456 |
+| 教师 | teacher002 | 123456 |
+| 教师 | teacher003 | 123456 |
+| 学生 | student001 | 123456 |
+| 学生 | student002 | 123456 |
+| 学生 | student003 | 123456 |
+| 学生 | student004 | 123456 |
+| 学生 | student005 | 123456 |
+
+## 📁 项目结构
+
+```
+on-campus-training/
+├── backend/                    # 后端代码
+│   ├── src/main/java/
+│   │   └── com/teacher/assistant/
+│   │       ├── config/        # 配置类
+│   │       ├── controller/    # 控制器
+│   │       ├── service/       # 业务逻辑
+│   │       ├── mapper/        # 数据访问层
+│   │       ├── entity/        # 实体类
+│   │       └── entity/dto/    # 数据传输对象
+│   └── src/main/resources/
+│       ├── mapper/           # SQL 映射文件
+│       └── application.yml   # 配置文件
+├── frontend/                  # 前端代码
+│   ├── src/
+│   │   ├── api/              # API 请求
+│   │   ├── stores/           # Pinia 状态管理
+│   │   ├── router/           # 路由配置
+│   │   ├── utils/            # 工具函数
+│   │   ├── views/            # 页面组件
+│   │   └── assets/           # 静态资源
+│   ├── public/               # 公共文件
+│   └── package.json          # 依赖配置
+└── docs/                     # 项目文档
+```
+
+## 🔌 API 文档
+
+### 认证相关
+- `POST /api/auth/login` - 用户登录
+- `POST /api/auth/logout` - 用户登出
+- `GET /api/auth/info` - 获取用户信息
+
+### 聊天对话
+- `POST /api/chat/send` - 发送消息给 AI
+- `GET /api/chat/history` - 获取聊天历史
+
+### 即时消息
+- `GET /api/message/list` - 获取消息列表
+- `POST /api/message/send` - 发送消息
+
+### 数据统计
+- `GET /api/statistics/overview` - 获取统计数据概览
+- `GET /api/statistics/users` - 用户统计
+- `GET /api/statistics/chats` - 对话统计
+
+### 用户管理
+- `GET /api/users/list` - 获取用户列表
+- `POST /api/users/create` - 创建用户
+- `PUT /api/users/update` - 更新用户信息
+- `DELETE /api/users/delete` - 删除用户
+
+## 🧪 开发命令
+
+### 后端开发
+```bash
+# 编译项目
+mvn clean compile
+
+# 运行测试
+mvn test
+
+# 打包
+mvn clean package
+```
+
+### 前端开发
+```bash
+# 安装依赖
+npm install
+
+# 开发模式
+npm run dev
+
+# 构建生产版本
+npm run build
+
+# 代码检查和修复
+npm run lint
+
+# 预览生产构建
+npm run preview
+```
+
+## ⚙️ 配置说明
+
+### 数据库配置
+```yaml
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/assistant
+    username: root
+    password: 123456
+```
+
+### Redis 配置
+```yaml
+spring:
+  redis:
+    host: localhost
+    port: 6379
+    password:
+```
+
+### JWT 配置
 ```yaml
 jwt:
   secret: MySecretKeyForTeacherAssistantSystem2025
   expiration: 604800  # 7天
-  header: Authorization
-  prefix: "Bearer "
 ```
 
-## 🎨 项目亮点
+### WebSocket 配置
+- 路径: `/ws`
+- 支持跨域
+- 基于 Spring WebSocket
 
-1. **架构清晰**：分层架构，职责明确
-2. **代码规范**：遵循阿里巴巴Java开发手册
-3. **安全可靠**：JWT认证、密码加密、SQL防注入
-4. **用户友好**：响应式设计、操作便捷
-5. **可维护性强**：模块化开发、注释完整
+## 🔒 安全说明
 
-## 📄 开发文档
+- 密码使用 BCrypt 加密存储
+- JWT Token 用于 API 认证
+- 前端通过 `Authorization` 头传递 Token
+- 敏感信息不要提交到代码仓库
 
-- [项目需求文档](项目需求文档.md)
-- [业务流程与产品设计](业务流程与产品设计.md)
-- [Claude开发指南](CLAUDE.md)
+## 🐛 常见问题
 
-## 🚧 待优化项
+### 1. 数据库连接失败
+- 检查 MySQL 服务是否启动
+- 验证数据库配置
+- 确认数据库和用户存在
 
-- [ ] 添加单元测试
-- [ ] 实现文件上传功能
-- [ ] 优化数据库索引
-- [ ] 添加日志系统
-- [ ] 实现缓存机制
-- [ ] 添加API限流
-- [ ] 完善错误处理
+### 2. Redis 连接失败
+- 检查 Redis 服务是否启动
+- 验证 Redis 配置
 
-## 👥 贡献指南
+### 3. 前端无法访问后端
+- 检查后端是否在 8080 端口运行
+- 验证 CORS 配置
+- 检查 JWT Token 是否有效
 
-欢迎提交 Issue 和 Pull Request！
+### 4. WebSocket 连接失败
+- 检查 WebSocket 配置
+- 确认防火墙设置
+- 验证 socket.io-client 版本
+
+### 5. DeepSeek API 调用失败
+- 验证 DEEPSEEK_API_KEY 环境变量
+- 检查网络连接和 API 配额
+- 查看后端日志获取错误信息
+
+## 📊 性能优化建议
+
+### 后端
+- 合理使用 Redis 缓存
+- 数据库查询优化
+- 分页查询避免全表扫描
+
+### 前端
+- 路由懒加载
+- 组件按需引入
+- 图片资源压缩
+
+## 📝 开发规范
+
+### 代码风格
+- 后端：遵循 Spring Boot 最佳实践，使用 Java 17 新特性
+- 前端：Vue 3 Composition API，ESLint 代码检查
+- 组件命名：PascalCase
+- 文件命名：kebab-case
+
+### 分层架构
+- Controller → Service → Mapper 分层设计
+- 使用 Lombok 减少样板代码
+- 实体类配置逻辑删除
 
 ## 📄 许可证
 
-本项目采用 MIT 许可证 - 详见 [LICENSE](LICENSE) 文件
+本项目仅供学习和研究使用。
 
-## 👨‍💻 作者
+## 🤝 贡献
 
-**Teacher Assistant Team**
+欢迎提交 Issue 和 Pull Request 来帮助改进项目。
+
+## 📞 联系方式
+
+如有问题，请通过以下方式联系：
+- 项目 Issue：https://github.com/your-repo/issues
+- 邮箱：your-email@example.com
 
 ---
 
-⭐ 如果这个项目对你有帮助，请给它一个星标！
+**注意**：首次使用请确保所有依赖服务（MySQL、Redis）已正确安装和配置。
