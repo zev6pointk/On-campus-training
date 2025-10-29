@@ -51,3 +51,12 @@ export function deleteUser(id) {
     method: 'delete'
   })
 }
+
+// 创建用户（管理员新增）
+export function createUser(data) {
+  return request({
+    url: '/auth/register',
+    method: 'post',
+    data
+  })
+}

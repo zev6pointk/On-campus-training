@@ -177,7 +177,7 @@ import { useRouter } from 'vue-router'
 import { useUserStore } from '@/stores/user'
 import { Search, Refresh, Plus } from '@element-plus/icons-vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
-import { getUsers, updateUser, deleteUser } from '@/api/auth'
+import { getUsers, updateUser, deleteUser, createUser } from '@/api/auth'
 import dayjs from 'dayjs'
 
 const router = useRouter()
@@ -216,17 +216,30 @@ const formData = reactive({
 
 const formRules = {
   username: [
-    { required: true, message: '请输入用户名', trigger: 'blur' }
+    { required: true, message: '请输入用户名', trigger: 'blur' },
+    { min: 3, max: 20, message: '用户名长度应在3-20个字符', trigger: 'blur' }
   ],
   password: [
     { required: true, message: '请输入密码', trigger: 'blur' },
-    { min: 6, message: '密码至少6位', trigger: 'blur' }
+    { min: 6, max: 20, message: '密码长度应在6-20个字符', trigger: 'blur' }
   ],
   realName: [
-    { required: true, message: '请输入真实姓名', trigger: 'blur' }
+    { required: true, message: '请输入真实姓名', trigger: 'blur' },
+    { min: 2, max: 10, message: '真实姓名长度应在2-10个字符', trigger: 'blur' }
+  ],
+  email: [
+    { required: true, message: '请输入邮箱', trigger: 'blur' },
+    { type: 'email', message: '请输入正确的邮箱格式', trigger: ['blur', 'change'] }
+  ],
+  phone: [
+    { required: true, message: '请输入手机号', trigger: 'blur' },
+    { pattern: /^1[3-9]\d{9}$/, message: '请输入正确的手机号格式', trigger: ['blur', 'change'] }
   ],
   userType: [
     { required: true, message: '请选择用户类型', trigger: 'change' }
+  ],
+  department: [
+    { required: true, message: '请输入院系', trigger: 'blur' }
   ]
 }
 
@@ -307,18 +320,33 @@ const handleSubmit = async () => {
 
     const data = { ...formData }
     if (data.id) {
-      // 编辑
-      await updateUser(data.id, data)
-      ElMessage.success('更新成功')
+      // 编辑用户
+      const result = await updateUser(data.id, data)
+      if (result.code === 200) {
+        ElMessage.success('更新成功')
+      } else {
+        ElMessage.error(result.message || '更新失败')
+        return // 如果更新失败，不关闭对话框也不刷新列表
+      }
     } else {
-      // 新增
-      ElMessage.info('新增功能开发中')
+      // 新增用户
+      const result = await createUser(data)
+      if (result.code === 200) {
+        ElMessage.success('新增用户成功')
+      } else {
+        ElMessage.error(result.message || '新增用户失败')
+        return // 如果新增失败，不关闭对话框也不刷新列表
+      }
     }
 
     dialogVisible.value = false
-    loadUsers()
+    loadUsers() // 成功后刷新用户列表
   } catch (error) {
-    console.error('表单验证失败:', error)
+    // 表单验证失败或其他错误
+    console.error('提交失败:', error)
+    if (error.message) {
+      ElMessage.error(error.message)
+    }
   }
 }
 
