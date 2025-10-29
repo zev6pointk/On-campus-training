@@ -422,6 +422,11 @@ onMounted(() => {
   margin-bottom: 20px;
 }
 
+/* 用户类型下拉框宽度设置 */
+.search-card .el-select {
+  width: 180px;
+}
+
 .pagination {
   margin-top: 20px;
   display: flex;
