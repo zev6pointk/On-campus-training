@@ -1,10 +1,5 @@
 <template>
   <div class="chat-container">
-    <div class="chat-header">
-      <h2>大模型助手</h2>
-      <p>基于DeepSeek的智能问答系统</p>
-    </div>
-
     <el-card class="chat-card">
       <!-- 对话区域 -->
       <div class="chat-messages" ref="messagesContainer">
@@ -291,23 +286,6 @@ onMounted(() => {
   grid-template-columns: 1fr 280px;
   gap: 20px;
   height: calc(100vh - 160px);
-}
-
-.chat-header {
-  grid-column: 1 / -1;
-  margin-bottom: 20px;
-}
-
-.chat-header h2 {
-  font-size: 24px;
-  color: #303133;
-  margin: 0 0 5px 0;
-}
-
-.chat-header p {
-  font-size: 14px;
-  color: #909399;
-  margin: 0;
 }
 
 .chat-card {

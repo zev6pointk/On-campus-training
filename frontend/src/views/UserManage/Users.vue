@@ -1,10 +1,5 @@
 <template>
   <div class="users-container">
-    <div class="page-header">
-      <h2>用户管理</h2>
-      <p>管理系统用户信息</p>
-    </div>
-
     <!-- 搜索栏 -->
     <el-card class="search-card">
       <el-form :inline="true" :model="searchForm">
@@ -399,22 +394,6 @@ onMounted(() => {
 <style scoped>
 .users-container {
   padding: 0;
-}
-
-.page-header {
-  margin-bottom: 20px;
-}
-
-.page-header h2 {
-  font-size: 24px;
-  color: #303133;
-  margin: 0 0 5px 0;
-}
-
-.page-header p {
-  font-size: 14px;
-  color: #909399;
-  margin: 0;
 }
 
 .search-card,

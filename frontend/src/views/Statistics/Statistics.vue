@@ -1,10 +1,5 @@
 <template>
   <div class="statistics-container">
-    <div class="page-header">
-      <h2>数据统计</h2>
-      <p>系统数据概览与统计分析</p>
-    </div>
-
     <!-- 概览卡片 -->
     <el-row :gutter="20" class="overview-cards">
       <el-col :span="6">
@@ -321,22 +316,6 @@ onMounted(() => {
 <style scoped>
 .statistics-container {
   padding: 0;
-}
-
-.page-header {
-  margin-bottom: 20px;
-}
-
-.page-header h2 {
-  font-size: 24px;
-  color: #303133;
-  margin: 0 0 5px 0;
-}
-
-.page-header p {
-  font-size: 14px;
-  color: #909399;
-  margin: 0;
 }
 
 .overview-cards {

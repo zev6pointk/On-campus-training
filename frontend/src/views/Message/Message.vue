@@ -1,10 +1,5 @@
 <template>
   <div class="message-container">
-    <div class="message-header">
-      <h2>即时通讯</h2>
-      <p>实时消息交流</p>
-    </div>
-
     <el-card class="message-card">
       <div class="message-layout">
         <!-- 联系人列表 -->
@@ -262,22 +257,6 @@ onUnmounted(() => {
 <style scoped>
 .message-container {
   padding: 0;
-}
-
-.message-header {
-  margin-bottom: 20px;
-}
-
-.message-header h2 {
-  font-size: 24px;
-  color: #303133;
-  margin: 0 0 5px 0;
-}
-
-.message-header p {
-  font-size: 14px;
-  color: #909399;
-  margin: 0;
 }
 
 .message-card {

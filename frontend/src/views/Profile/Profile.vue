@@ -1,10 +1,5 @@
 <template>
   <div class="profile-container">
-    <div class="page-header">
-      <h2>个人资料</h2>
-      <p>管理您的个人信息和头像</p>
-    </div>
-
     <el-card class="profile-card" v-loading="loading">
       <el-tabs v-model="activeTab" @tab-change="handleTabChange">
         <!-- 基本信息tab -->
@@ -458,22 +453,6 @@ onMounted(() => {
 <style scoped>
 .profile-container {
   padding: 0;
-}
-
-.page-header {
-  margin-bottom: 20px;
-}
-
-.page-header h2 {
-  font-size: 24px;
-  color: #303133;
-  margin: 0 0 5px 0;
-}
-
-.page-header p {
-  font-size: 14px;
-  color: #909399;
-  margin: 0;
 }
 
 .profile-card {

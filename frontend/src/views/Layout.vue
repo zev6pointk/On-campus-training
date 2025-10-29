@@ -50,6 +50,9 @@
             circle
             @click="toggleCollapse"
           />
+          <div class="page-title">
+            <h1>{{ route.meta.title }}</h1>
+          </div>
         </div>
 
         <div class="header-right">
@@ -214,6 +217,14 @@ const handleCommand = (command) => {
 .header-left {
   display: flex;
   align-items: center;
+  gap: 20px;
+}
+
+.page-title h1 {
+  font-size: 20px;
+  color: #303133;
+  margin: 0;
+  font-weight: 500;
 }
 
 .header-right {
