@@ -5,7 +5,8 @@ import { ElMessage } from 'element-plus'
 
 export const useUserStore = defineStore('user', () => {
   const token = ref(localStorage.getItem('token') || '')
-  const userInfo = ref(null)
+  // 页面刷新时从localStorage恢复用户信息
+  const userInfo = ref(localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : null)
 
   const isLoggedIn = computed(() => !!token.value)
 
@@ -17,6 +18,7 @@ export const useUserStore = defineStore('user', () => {
         token.value = result.data.token
         userInfo.value = result.data.user
         localStorage.setItem('token', token.value)
+        localStorage.setItem('userInfo', JSON.stringify(userInfo.value))
         ElMessage.success('登录成功')
         return true
       } else {
@@ -37,6 +39,7 @@ export const useUserStore = defineStore('user', () => {
       const result = await getCurrentUser()
       if (result.code === 200) {
         userInfo.value = result.data
+        localStorage.setItem('userInfo', JSON.stringify(userInfo.value))
         return true
       } else {
         logout()
@@ -53,6 +56,7 @@ export const useUserStore = defineStore('user', () => {
     token.value = ''
     userInfo.value = null
     localStorage.removeItem('token')
+    localStorage.removeItem('userInfo')
     ElMessage.success('已退出登录')
   }
 
