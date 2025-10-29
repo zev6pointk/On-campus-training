@@ -42,12 +42,6 @@
           </el-button>
         </el-form-item>
 
-        <div class="login-tips">
-          <p>测试账号：</p>
-          <p>管理员：admin / admin123</p>
-          <p>教师：teacher / teacher123</p>
-          <p>学生：student / student123</p>
-        </div>
       </el-form>
     </div>
   </div>
@@ -144,17 +138,4 @@ const handleLogin = async () => {
   font-size: 16px;
 }
 
-.login-tips {
-  margin-top: 20px;
-  padding: 15px;
-  background: #f5f7fa;
-  border-radius: 5px;
-  font-size: 12px;
-  color: #606266;
-  line-height: 1.6;
-}
-
-.login-tips p {
-  margin: 5px 0;
-}
 </style>
