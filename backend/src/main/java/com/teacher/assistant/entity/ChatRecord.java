@@ -59,6 +59,6 @@ public class ChatRecord implements Serializable {
     /**
      * 创建时间
      */
-    @TableField(value = "create_time", fill = FieldFill.INSERT)
+    @TableField(value = "created_time", fill = FieldFill.INSERT)
     private LocalDateTime createTime;
 }

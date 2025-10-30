@@ -1,5 +1,6 @@
 package com.teacher.assistant.entity.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
  * @since 2025-10-28
  */
 @Data
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class DeepSeekResponseDTO {
 
     private String id;
@@ -21,22 +23,27 @@ public class DeepSeekResponseDTO {
     private Usage usage;
 
     @Data
+    @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Choice {
         private Integer index;
         private Message message;
         private String finish_reason;
+        private Object logprobs;
     }
 
     @Data
+    @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Message {
         private String role;
         private String content;
     }
 
     @Data
+    @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Usage {
         private Integer prompt_tokens;
         private Integer completion_tokens;
         private Integer total_tokens;
+        private Object prompt_tokens_details;
     }
 }

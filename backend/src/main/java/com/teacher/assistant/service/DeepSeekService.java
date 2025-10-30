@@ -56,6 +56,7 @@ public class DeepSeekService {
             requestBody.put("model", model);
             requestBody.put("max_tokens", maxTokens);
             requestBody.put("temperature", temperature);
+            requestBody.put("stream", false);
 
             // 构建消息历史
             List<Map<String, String>> messages = new ArrayList<>();
