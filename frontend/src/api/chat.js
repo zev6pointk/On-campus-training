@@ -5,7 +5,8 @@ export function sendMessage(data) {
   return request({
     url: '/chat/send',
     method: 'post',
-    data
+    data,
+    timeout: 60000 // 60秒超时，AI对话需要更长时间
   })
 }
 

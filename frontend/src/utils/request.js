@@ -32,7 +32,7 @@ request.interceptors.response.use(
     return data
   },
   error => {
-    const { response } = error
+    const { response, code } = error
 
     if (response?.status === 401) {
       ElMessage.error('登录已过期，请重新登录')
@@ -43,6 +43,8 @@ request.interceptors.response.use(
       ElMessage.error('没有权限访问该资源')
     } else if (response?.status === 500) {
       ElMessage.error('服务器内部错误')
+    } else if (code === 'ECONNABORTED' || error.message.includes('timeout')) {
+      ElMessage.error('请求超时，请检查网络连接或稍后重试')
     } else {
       ElMessage.error(response?.data?.message || error.message || '请求失败')
     }
